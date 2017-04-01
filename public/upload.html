@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>上传图片</title>
+	<style type="text/css">
+	.upload-container {
+	    background-image: url(../../images/rv/add.jpg);
+	    background-repeat: no-repeat;
+	    width: 180px;
+	    height: 200px;
+	    padding-bottom: 10px;
+	    display: inline-block;
+	    vertical-align: middle;
+	    .fileupload {
+	        opacity: 0;
+	        filter: alpha(opacity=0);
+	        width: 200px;
+	        height: 200px;
+	    }
+	}
+	</style>
+</head>
+<body>
+	<div class="upload-container">
+	    <input type="file" name="fileToUpload" id="fileToUpload" class="fileupload" />
+	</div>
+
+	
+	<!--[if !IE]>-->
+
+			<script src="/assets/js/jquery-2.1.1.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="/assets/js/jquery-1.11.1.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='/assets/js/jquery-2.1.1.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='/assets/js/jquery-1.11.1.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script type="text/javascript">
+		$('.fileupload').change(function(event) {
+	    /* Act on the event */
+	    if ($('.fileupload').val().length) {
+	        var fileName = $('.fileupload').val();
+	        var extension = fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase();
+	        if (extension == ".jpg" || extension == ".png") {
+	                var data = new FormData();
+	                data.append('file', $('#fileToUpload')[0].files[0]);
+	                $.ajax({
+						url         : '/upload',
+						type        : 'POST',
+						data        : data,
+						cache       : false,
+						contentType : false, //不可缺参数
+						processData : false, //不可缺参数
+	                    success: function(data) {
+	                        console.log(data);
+	                    },
+	                    error: function() {
+	                        console.log('error');
+	                    }
+	                });
+	        }
+	    }
+	});
+	</script>
+</body>
+</html>

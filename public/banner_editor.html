@@ -1,0 +1,46 @@
+<div class="modal fade" id="banner_editor">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Banner</h4>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="_id" disabled="disabled" class="form-control">
+				<div class="form-group">
+                    <label class="col-md-3 control-label" for="text-input">标题</label>
+                    <div class="col-md-9">
+                        <input type="text" id="title" name="text-input" class="form-control" placeholder="Banner 标题" value="">
+                        <span class="help-block">标题尽量不要多于20字</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="text-input">排序</label>
+                    <div class="col-md-9">
+                        <input type="text" id="order" name="text-input" class="form-control" placeholder="Banner 排序" value="0">
+                        <span class="help-block">输入整数，数值越小排列越靠前</span>
+                    </div>
+                </div>
+				
+				<div class="form-group">
+					<label class="control-label">上传Banner，文件类型必须为 jpg/png 格式</label>
+					<div class="controls">
+					  	<div id="dropzone">
+							<form action="/upload" id="imgurl" class="dropzone">
+								<div class="fallback">
+									<input id="imgurl" name="upload" type="file" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" onclick="editorBanner(this)" class="btn btn-primary">提交</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

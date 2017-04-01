@@ -1,0 +1,63 @@
+<%let compamy_logo_zh = setting.find(n=> n.key == 'compamy_logo' && n.lang == 'zh')
+let compamy_name_zh = setting.find(n=>n.key == 'compamy_name' && n.lang == 'zh')
+let slogan_zh = setting.find(n=>n.key == 'slogan' && n.lang == 'zh')
+let phone_zh = setting.find(n=>n.key == 'phone' && n.lang == 'zh')
+let email_zh = setting.find(n=>n.key == 'email' && n.lang == 'zh')
+let address_zh = setting.find(n=>n.key == 'address' && n.lang == 'zh')
+let compamy_logo_en = setting.find(n=>n.key == 'compamy_logo' && n.lang == 'en')
+let compamy_name_en = setting.find(n=>n.key == 'compamy_name' && n.lang == 'en')
+let slogan_en = setting.find(n=>n.key == 'slogan' && n.lang == 'en')
+let phone_en = setting.find(n=>n.key == 'phone' && n.lang == 'en')
+let email_en = setting.find(n=>n.key == 'email' && n.lang == 'en')
+let address_en = setting.find(n=>n.key == 'address' && n.lang == 'en')%>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+							<h3 class="text-center"><strong><%=type%></strong></h3>
+							<hr>
+							
+							<h4><strong>公司信息</strong></h4>
+							
+							<ul class="profile-details">
+								<li>
+									<div><i class="fa fa-thumbs-up"></i> Logo 名字</div>
+									<%-compamy_logo_zh?compamy_logo_zh.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-building-o"></i> 公司名称</div>
+									<%-compamy_name_zh?compamy_name_zh.value: ''%>
+									</br>
+									<%-compamy_name_en?compamy_name_en.value: ''%>
+								</li>
+							</ul>
+							
+							<hr>		
+
+							<h4><strong>基本信息</strong></h4>
+
+							<ul class="profile-details">
+								<li>
+									<div><i class="fa fa-bullhorn"></i> 标语</div>
+									<%-slogan_zh?slogan_zh.value: ''%>
+									</br>
+									<%-slogan_en?slogan_en.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-phone"></i> 联系电话</div>
+									<%-phone_zh?phone_zh.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-envelope"></i> E-mail</div>
+									<%-email_zh?email_zh.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-map-marker"></i> 公司地址</div>
+									<%-address_zh?address_zh.value: ''%>
+									</br>
+									<%-address_en?address_en.value: ''%>
+								</li>
+							</ul>	
+							
+						</div>
+		
+	</div>

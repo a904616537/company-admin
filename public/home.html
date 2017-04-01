@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>后台</title>		
+		
+		<!-- Fav and touch icons -->
+		<link rel="shortcut icon" href="/assets/ico/favicon.ico" type="image/x-icon" />    
+
+	    <!-- Css files -->
+	    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">		
+		<link href="/assets/css/jquery.mmenu.css" rel="stylesheet">		
+		<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/assets/css/climacons-font.css" rel="stylesheet">
+		<link href="/assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+	    <link href="/assets/css/style.min.css" rel="stylesheet">
+
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+</head>
+
+<body>
+	<!-- start: Header -->
+	<div class="navbar" role="navigation">
+	
+		<div class="container-fluid">		
+			
+			
+
+	        <ul class="nav navbar-nav navbar-right">
+	        	<li class="dropdown visible-md visible-lg">
+	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-refresh"></i>切换后台</a>
+	        		<ul class="dropdown-menu">
+	        			<li><a href="/?type=skyfortune"><i class="fa fa-adn"></i> 切换到 skyfortune </a>
+						<li><a href="/?type=seajetlines"><i class="fa fa-bitcoin"></i> 切换到 seajetlines </a>
+	        		</ul>
+	      		</li>
+				<li class="dropdown visible-md visible-lg">
+	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=admin.name%></a>
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header">
+							<strong>账户</strong>
+						</li>
+						<li><a href="/register"><i class="fa fa-user"></i>添加管理员</a></li>
+						<li><a href="/editor/password"><i class="fa fa-wrench"></i> 修改密码</a></li>
+						<li class="divider"></li>
+						<li><a href="/logout"><i class="fa fa-sign-out"></i>注销</a></li>
+	        		</ul>
+	      		</li>
+				<li><a href="/logout" title="注销"><i class="fa fa-power-off"></i></a></li>
+			</ul>
+			
+		</div>
+		
+	</div>
+	<!-- end: Header -->
+	
+	<div class="container-fluid content">
+	
+		<div class="row">
+				
+			<!-- start: Main Menu -->
+			<%- include menu.html %>
+			<!-- end: Main Menu -->
+		
+		<!-- start: Content -->
+		<div class="main">
+		
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa-laptop"></i>看板</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i>Home</li>
+						<li><i class="fa fa-laptop"></i>Dashboard</li>				  	
+					</ol>
+				</div>
+			</div>
+
+			<%let compamy_logo_zh = setting.find(n=> n.key == 'compamy_logo' && n.lang == 'zh')
+			let compamy_name_zh = setting.find(n=>n.key == 'compamy_name' && n.lang == 'zh')
+			let slogan_zh = setting.find(n=>n.key == 'slogan' && n.lang == 'zh')
+			let phone_zh = setting.find(n=>n.key == 'phone' && n.lang == 'zh')
+			let email_zh = setting.find(n=>n.key == 'email' && n.lang == 'zh')
+			let address_zh = setting.find(n=>n.key == 'address' && n.lang == 'zh')
+			let compamy_logo_en = setting.find(n=>n.key == 'compamy_logo' && n.lang == 'en')
+			let compamy_name_en = setting.find(n=>n.key == 'compamy_name' && n.lang == 'en')
+			let slogan_en = setting.find(n=>n.key == 'slogan' && n.lang == 'en')
+			let phone_en = setting.find(n=>n.key == 'phone' && n.lang == 'en')
+			let email_en = setting.find(n=>n.key == 'email' && n.lang == 'en')
+			let address_en = setting.find(n=>n.key == 'address' && n.lang == 'en')%>
+
+			<div class="row profile">
+				<div class="col-md-4" id="col">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="text-center"><strong><%=type%></strong></h3>
+							<hr>
+							
+							<h4><strong>公司信息</strong></h4>
+							
+							<ul class="profile-details">
+								<li>
+									<div><i class="fa fa-thumbs-up"></i> Logo 名字</div>
+									<%-compamy_logo_zh?compamy_logo_zh.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-building-o"></i> 公司名称</div>
+									<%-compamy_name_zh?compamy_name_zh.value: ''%>
+									</br>
+									<%-compamy_name_en?compamy_name_en.value: ''%>
+								</li>
+							</ul>
+							
+							<hr>		
+
+							<h4><strong>基本信息</strong></h4>
+
+							<ul class="profile-details">
+								<li>
+									<div><i class="fa fa-bullhorn"></i> 标语</div>
+									<%-slogan_zh?slogan_zh.value: ''%>
+									</br>
+									<%-slogan_en?slogan_en.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-phone"></i> 联系电话</div>
+									<%-phone_zh?phone_zh.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-envelope"></i> E-mail</div>
+									<%-email_zh?email_zh.value: ''%>
+								</li>
+								<li>
+									<div><i class="fa fa-map-marker"></i> 公司地址</div>
+									<%-address_zh?address_zh.value: ''%>
+									</br>
+									<%-address_en?address_en.value: ''%>
+								</li>
+							</ul>	
+							
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-4">
+                    <div class="panel panel-default">                               
+                        <div class="panel-heading">
+                            <h2><strong>更新信息（中文）</strong></h2>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-vertical hover-stripped" role="form">
+                                <div class="form-group">
+                                    <label class="control-label">Logo 名字</label>
+                                    <input type="text" class="form-control" key="compamy_logo" lang="zh" value="<%=compamy_logo_zh?compamy_logo_zh.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">公司名称</label>
+                                    <input type="text" key="compamy_name" lang="zh" class="form-control" value="<%=compamy_name_zh?compamy_name_zh.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">标语</label>
+                                    <input type="text" key="slogan" lang="zh" class="form-control" value="<%=slogan_zh?slogan_zh.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">联系电话</label>
+                                    <input type="text" key="phone" lang="zh" class="form-control" value="<%=phone_zh?phone_zh.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input type="text" key="email" lang="zh" class="form-control" value="<%=email_zh?email_zh.value: ''%>">
+                                </div>
+								
+                                <div class="form-group">
+                                    <label class="control-label">公司地址</label>
+                                    <input type="text" key="address" lang="zh" value="<%=address_zh?address_zh.value: ''%>" class="form-control">
+                                </div>
+                                        
+                            </form>
+                        </div>
+                    </div>
+					
+				</div><!--/.col-->
+				<div class="col-md-4">
+                    <div class="panel panel-default">                               
+                        <div class="panel-heading">
+                            <h2><i class="fa fa-heart-o red"></i><strong>更新信息（英文）</strong></h2>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-vertical hover-stripped" role="form">
+                                <div class="form-group">
+                                    <label class="control-label">Logo 名字</label>
+                                    <input type="text" class="form-control" key="compamy_logo" lang="en" value="<%=compamy_logo_en?compamy_logo_en.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">公司名称</label>
+                                    <input type="text" key="compamy_name" lang="en" class="form-control" value="<%=compamy_name_en?compamy_name_en.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">标语</label>
+                                    <input type="text" key="slogan" lang="en" class="form-control" value="<%=slogan_en?slogan_en.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">联系电话</label>
+                                    <input type="text" key="phone" lang="en" class="form-control" value="<%=phone_en?phone_en.value: ''%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input type="text" key="email" lang="en" class="form-control" value="<%=email_en?email_en.value: ''%>">
+                                </div>
+								
+                                <div class="form-group">
+                                    <label class="control-label">公司地址</label>
+                                    <input type="text" key="address" lang="en" value="<%=address_en?address_en.value: ''%>" class="form-control">
+                                </div>
+                                        
+                            </form>
+                        </div>
+                    </div>
+					
+				</div><!--/.col-->
+			
+			</div><!--/.row profile-->
+
+
+		</div>
+		<!-- end: Content -->
+		<br><br><br>
+		
+	</div><!--/container-->
+		
+	
+	
+	<div class="clearfix"></div>
+	
+		
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="/assets/js/jquery-2.1.1.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="assets/js/jquery-1.11.1.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='/assets/js/jquery-2.1.1.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='assets/js/jquery-1.11.1.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>	
+	
+	
+	<!-- page scripts -->
+	<script src="/assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="/assets/plugins/touchpunch/jquery.ui.touch-punch.min.js"></script>
+	<script src="/assets/plugins/moment/moment.min.js"></script>
+	<!--[if lte IE 8]>
+		<script language="javascript" type="text/javascript" src="assets/plugins/excanvas/excanvas.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+		$('input').change(function() {
+			var key   = $(this).attr('key');
+			var lang  = $(this).attr('lang');
+			var value = $(this).val();
+
+			$.ajax({
+                url: '/',
+                type: 'post',
+                data: {key: key, value: value, lang:lang},
+                success: function(data) {
+                    $('#col').html(data);
+                }
+            });
+		})
+	</script>
+	
+	<!-- end: JavaScript-->
+	
+</body>
+</html>

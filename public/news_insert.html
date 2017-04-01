@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>新增新闻 - 后台</title>			
+		
+
+		<!-- Favicon and touch icons -->
+		<link rel="shortcut icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+
+	    <!-- Css files -->
+	    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">		
+		<link href="/assets/css/jquery.mmenu.css" rel="stylesheet">		
+		<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+		<link href="/assets/plugins/chosen/css/chosen.css" rel="stylesheet">
+		<link href="/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet">
+	    <link href="/assets/css/style.min.css" rel="stylesheet">
+		<link href="/assets/css/add-ons.min.css" rel="stylesheet">		
+
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+</head>
+
+<body>
+	
+	<div class="container-fluid content">
+	
+		<div class="row">
+			<%- include menu.html %>
+			
+		<!-- start: Content -->
+		<div class="main ">
+		
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa-indent"></i>编辑新闻</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="/">Home</a></li>
+						<li><i class="fa fa-list-alt"></i><a href="/news">新闻</a></li>
+						<li><i class="fa fa-indent"></i>编辑新闻</li>				
+					</ol>
+				</div>
+			</div>
+
+
+
+			
+			<div class="row hideInIE8">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2><i class="fa fa-indent red"></i><strong>设置</strong></h2>
+							
+						</div>
+						<div class="panel-body">
+							<div class="form-horizontal">
+								  
+								  <div class="form-group">
+									<div class="controls">
+										
+										<div class="col-md-1 col-sm-2 col-xs-3">
+											<label class="control-label">状态</label>
+											<label class="switch switch-primary">
+										      <input type="checkbox" id="is_show" class="switch-input" <%=news.is_show?"checked":""%>>
+										      <span class="switch-label" data-on="显示" data-off="隐藏"></span>
+										      <span class="switch-handle"></span>
+										    </label>
+										</div>
+
+										<div class="col-md-1 col-sm-2 col-xs-3">
+
+											<label class="control-label">置顶</label>
+											<label class="switch switch-primary">
+										      <input type="checkbox" id="top" class="switch-input" <%=news.top?"checked":""%>>
+										      <span class="switch-label" data-on="是" data-off="否"></span>
+										      <span class="switch-handle"></span>
+										    </label>
+										</div>
+
+									</div>
+
+								  </div>
+							</div>
+						</div>
+					</div>
+				</div><!--/col-->
+
+			</div><!--/row-->
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2><i class="fa fa-plus-square-o red"></i><strong>图片</strong></h2>
+							<div class="panel-actions">
+							</div>
+						</div>
+						<div class="panel-body">
+								  
+							<div class="form-group">
+								<label class="control-label">上传文件，文件类型必须为 jpg/png 格式</label>
+								<div class="controls">
+								  	<div id="dropzone">
+										<form action="/upload" id="imgurl" class="dropzone">
+											<div class="fallback">
+												<input id="imgurl" name="upload" type="file" multiple="" />
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div><!--/col-->
+			</div>
+			
+			<div class="row">
+
+				<%
+            		var zh_news={};
+            		if(news.article) {
+            			zh_news = news.article.find(article => article.language == "zh");
+            		}
+            	%>
+
+			    <div class="col-md-6">
+			        <div class="panel panel-default">
+			            <div class="panel-heading">
+			                <h2><i class="fa fa-indent red"></i><strong>中文版本</strong></h2>
+			            </div>
+						<div class="panel-body">
+				                
+				                <div class="form-group">
+				                    <label class="col-md-3 control-label" for="text-input">标题</label>
+				                    <div class="col-md-9">
+				                    	
+				                        <input type="text" id="zh_title" name="text-input" class="form-control" placeholder="文章标题" value="<%=zh_news.title%>">
+				                        <span class="help-block">标题尽量不要多于20字</span>
+				                    </div>
+				                </div>
+
+				                <div class="form-group">
+				                    <label class="col-md-3 control-label" for="text-input">描述</label>
+				                    <div class="col-md-9">
+										
+										<textarea id="zh_desc" name="zh_desc" rows="9" class="form-control" placeholder="描述.."><%=zh_news.desc%></textarea>
+										<span class="help-block"></span>
+				                    </div>
+				                </div>
+
+								<div class="form-group">
+				                    <label class="col-md-3 control-label" for="textarea-input">文章内容</label>
+				                    <div class="col-md-9">
+				                        <textarea id="zh_content" name="textarea-input" rows="9" class="form-control textarea" style="height: 400px" placeholder="在这里输入文章内容" ><%=zh_news.context%></textarea>
+				                    </div>
+				                </div>
+								<br>
+						</div>
+						<div class="panel-footer">
+		                    <button type="button" id="submit" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i>提交</button>
+		                </div>	
+			        </div>	
+			    </div>
+
+
+					<%
+                		var en_news = {};
+                		if(en_news.article) {
+                			en_news = news.article.find(article => article.language == "en");
+                		}
+                	%>
+			     <div class="col-md-6">
+			        <div class="panel panel-default">
+			            <div class="panel-heading">
+			                <h2><i class="fa fa-indent red"></i><strong>英文版本</strong></h2>
+			            </div>
+						<div class="panel-body">
+				                
+				                <div class="form-group">
+				                    <label class="col-md-3 control-label" for="text-input">标题</label>
+				                    <div class="col-md-9">
+				                        <input type="text" id="en_title" name="text-input" class="form-control" placeholder="文章标题" value="<%=en_news.title%>">
+				                        <span class="help-block">文章标题</span>
+				                    </div>
+				                </div>
+
+								<div class="form-group">
+				                    <label class="col-md-3 control-label" for="text-input">描述</label>
+				                    <div class="col-md-9">
+										
+										<textarea id="en_desc" name="en_desc" rows="9" class="form-control" placeholder="描述.."><%=en_news.desc%></textarea>
+										<span class="help-block"></span>
+				                    </div>
+				                </div>
+
+								<div class="form-group">
+				                    <label class="col-md-3 control-label" for="textarea-input">文章内容</label>
+				                    <div class="col-md-9">
+				                        <textarea id="en_content" name="textarea-input" rows="9" style="height: 400px" class="form-control textarea" placeholder="请输入文章内容"><%=en_news.context%></textarea>
+				                    </div>
+				                </div>
+								<br>
+						</div>
+			        </div>	
+			    </div>
+
+				
+			</div><!--/.row-->
+			
+			
+			
+				
+    
+		</div>
+		<!-- end: Content -->
+		
+	</div><!--/container-->
+		
+	<%- include modal.html %>
+	
+	<div class="clearfix"></div>
+	
+		
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="/assets/js/jquery-2.1.1.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="/assets/js/jquery-1.11.1.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='/assets/js/jquery-2.1.1.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='/assets/js/jquery-1.11.1.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>	
+	
+	
+	<!-- page scripts -->
+	<script src="/assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="/assets/plugins/chosen/js/chosen.jquery.min.js"></script>
+	<script src="/assets/plugins/autosize/jquery.autosize.min.js"></script>
+	<script src="/assets/plugins/placeholder/jquery.placeholder.min.js"></script>
+	<script src="/assets/plugins/maskedinput/jquery.maskedinput.min.js"></script>
+	<script src="http://cdn.bootcss.com/tinymce/4.4.3/tinymce.min.js"></script>
+	<script src="/assets/plugins/dropzone/js/dropzone.min.js"></script>
+	<script src="/assets/plugins/moment/moment.min.js"></script>
+
+	<!-- theme scripts -->
+	<script src="/assets/js/SmoothScroll.js"></script>
+	<script src="/assets/js/jquery.mmenu.min.js"></script>
+
+	<script>
+		var imgurl;
+		tinymce.init({ selector:'.textarea' });
+		$("#imgurl.dropzone").dropzone({
+			success: function(status, data) {
+			    imgurl = data.msg;
+			}
+		});
+		function submit(){
+			var msg     = $("#modal_msg");
+			var top     = $("#top").is(':checked');
+			var is_show = $("#is_show").is(':checked');
+
+			var zh_title = $("#zh_title").val();
+			var zh_desc = $("#zh_desc").val();
+			var zh_content = tinyMCE.editors[0].getContent();
+
+			var en_title = $("#en_title").val();
+			var en_desc = $("#en_desc").val();
+			var en_content = tinyMCE.editors[1].getContent();
+
+			var data = {
+				"imgurl"     : imgurl,
+				"top"        : top,
+				"is_show"    : is_show,
+				"zh_title"   : zh_title,
+				"zh_desc"    : zh_desc,
+				"zh_content" : zh_content,
+				"en_title"   : en_title,
+				"en_desc"    : en_desc,
+				"en_content" : en_content
+			};
+			console.log(data)
+			var type = 'post';
+			<%if(news._id) {%>
+				type = 'put'
+				data._id = '<%=news._id%>';
+			<%}%>
+			$.ajax({
+				url    : '/news/article',
+				type   : type,
+				data   : data,
+				success: function(data, status) {
+					if(status == 'success') {
+						if(data.status == 1) {
+							msg.text(data.msg);
+						} else {
+							msg.text(data.msg);
+						}
+					} else {
+						msg.text('请求失败');
+					}
+				},
+				error: function(data, err){
+					msg.text('请求出错');
+					console.log(data);
+				}
+			});
+		}
+
+		$(function(){
+
+			$("#submit").click(submit);
+
+			$(document).keyup(function(event){
+				if(event.keyCode ==13){
+					$("#submit").trigger("click");
+				}
+			});
+		});
+	</script>
+
+	<!-- end: JavaScript-->
+	
+</body>
+</html>
