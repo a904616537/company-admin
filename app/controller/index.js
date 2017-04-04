@@ -13,13 +13,9 @@ router.route('/')
 		const type       = req.query.type;
 		req.session.type = type;
 		setting_service.getAll(type, (err, setting) => {
-			console.log('admin', admin)
-			console.log('setting', setting)
-			console.log('type', type)
 			res.render('home', { admin, type, setting});
 		})
     } else{
-    	console.log(req.session.type)
     	setting_service.getAll(req.session.type, (err, setting) => {
 			res.render('home', {admin, type : req.session.type, setting});
 		})

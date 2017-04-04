@@ -7,7 +7,7 @@ dateTime      = require('../helpers/dateTime');
 module.exports = {
 	// 获取所有新闻
 	getAll(type, callback) {
-		setting_mongo.find({type})
+		setting_mongo.find({type: type})
 		.exec(callback)
 	},
 	Update(key, type, value, lang, callback) {
