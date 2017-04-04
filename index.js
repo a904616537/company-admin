@@ -4,7 +4,7 @@ config        = require('./setting/config'),
 glob          = require('glob');
 
 // Mongodb 预加载
-models = glob.sync(config.root + '/app/models/*.js')
+var models = glob.sync(config.root + '/app/models/*.js')
 models.forEach(model => {
     console.log('Loading Mongodb model：' + model);
     require(model);
