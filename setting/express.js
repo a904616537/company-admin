@@ -51,7 +51,7 @@ module.exports = (app, config) => {
         next();
     })
 
-    controllers = glob.sync(config.root + '/app/controller/*.js');
+    var controllers = glob.sync(config.root + '/app/controller/*.js');
 
     controllers.forEach(controller => {
 		console.log('Loading Router：', controller);
