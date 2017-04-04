@@ -1,4 +1,4 @@
-
+'use strict';
 let express   = require('express'),
 router        = express.Router(),
 admin_service = require('../services/user.service'),

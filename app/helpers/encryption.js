@@ -2,7 +2,7 @@
  * Author: Kain·Altion <kain@foowala.com>
  * Module description: 全局加密模块
  */
-
+'use strict';
 const crypto = require('crypto');
 
 module.exports = {

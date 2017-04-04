@@ -1,3 +1,4 @@
+'use strict';
 const config  = require('../../setting/config'),
 mongoose      = require('mongoose'),
 company_mongo = mongoose.model('company'),

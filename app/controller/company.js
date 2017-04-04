@@ -1,3 +1,4 @@
+'use strict';
 let express     = require('express'),
 router          = express.Router(),
 company_service = require('../services/company.service'),

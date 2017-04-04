@@ -1,3 +1,4 @@
+'use strict';
 var mongoose    = require('mongoose'),
 	Schema      = mongoose.Schema,
 	news_Schema = new Schema({

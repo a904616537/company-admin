@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express'),
 config        = require('./setting/config'),
 glob          = require('glob');

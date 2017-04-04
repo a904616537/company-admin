@@ -1,4 +1,5 @@
 
+'use strict';
 let express  = require('express'),
 router       = express.Router(),
 news_service = require('../services/news.service'),

@@ -1,3 +1,4 @@
+'use strict';
 var db,
     mongoose     = require('mongoose'),
     path         = require('path'),
