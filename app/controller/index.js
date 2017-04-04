@@ -17,6 +17,8 @@ router.route('/')
 		})
     } else{
     	setting_service.getAll(req.session.type, (err, setting) => {
+    		console.log('setting', setting)
+    		console.log('err', err)
 			res.render('home', {admin, type : req.session.type, setting});
 		})
     }
