@@ -10,7 +10,7 @@ models.forEach(model => {
     require(model);
 })
 
-app = express();
+var app = express();
 
 // 应用程序加载
 require('./setting/express')(app, config);
