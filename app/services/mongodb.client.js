@@ -10,6 +10,8 @@ var db,
         if (err) console.error('ERROR: Unable to connect to MongoDB on startup at: ' + new Date());
         else db = database;
     };
+    
+mongoose.Promise = global.Promise
 console.log('mongodb config:', mongodb_cfg);
 mongoose.connect(mongodb_cfg, connectOpen);
 
