@@ -19,7 +19,7 @@ router.route('/')
 			res.render('home', { admin, type, setting});
 		})
     } else{
-    	console.log(3)
+    	console.log(req.session.type)
     	setting_service.getAll(req.session.type, (err, setting) => {
 			res.render('home', {admin, type : req.session.type, setting});
 		})
