@@ -20,9 +20,9 @@ router.route('/')
     }
 })
 .post((req, res) => {
-	const {key, value, lang} = req.body;
+
 	const type = req.session.type;
-	setting_service.Update(key, type, value, lang, (err, result) => {
+	setting_service.Update(req.body.key, type, req.body.value, req.body.lang, (err, result) => {
 		setting_service.getAll(type, (err, setting) => {
     		console.log(setting)
 			res.render('info', {type, setting});
