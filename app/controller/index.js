@@ -6,19 +6,16 @@ setting_service = require('../services/setting.service');
 
 router.route('/')
 .get((req, res, next) => {
-	console.log(1);
     var admin = req.session.admin;
     if(req.query.type) {
-    	console.log(2)
 		const type       = req.query.type;
 		req.session.type = type;
 		setting_service.getAll(type, (err, setting) => {
 			res.render('home', { admin, type, setting});
 		})
     } else{
+    	console.log('admin', admin)
     	setting_service.getAll(req.session.type, (err, setting) => {
-    		console.log('setting', setting)
-    		console.log('err', err)
 			res.render('home', {admin, type : req.session.type, setting});
 		})
     }
