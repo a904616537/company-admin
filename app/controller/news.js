@@ -60,13 +60,15 @@ router.route('/article')
             is_show : req.body.is_show
         },
         articles = [{
-			title    : req.body.zh_title,
-			context  : req.body.zh_content,
-			language : 'zh'
+            title    : req.body.zh_title,
+            desc     : req.body.zh_desc,
+            context  : req.body.zh_content,
+            language : 'zh'
 	    },{
-			title    : req.body.en_title,
-			context  : req.body.en_content,
-			language : 'en'
+            title    : req.body.en_title,
+            desc     : req.body.en_desc,
+            context  : req.body.en_content,
+            language : 'en'
 	    }],
         msg = message();
 

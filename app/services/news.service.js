@@ -8,9 +8,10 @@ module.exports = {
 	// 获取所有新闻
 	getNews(type, callback) {
 		news_mongo.find({type})
-		.sort('-createTime')
-		.exec((err, user) => {
-			callback(user)
+		.sort({top: -1, createTime: -1})
+		.exec((err, news) => {
+			console.log(news)
+			callback(news)
 		})
 	},
 	Insert(news) {
