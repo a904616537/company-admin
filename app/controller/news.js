@@ -20,7 +20,6 @@ router.route('/article')
     .put((req, res) => {
         var model = {
             _id     : req.body._id,
-            imgurl  : req.body.imgurl,
             top     : req.body.top,
             is_show : req.body.is_show
         },
@@ -37,6 +36,8 @@ router.route('/article')
         }],
         msg = message();
         
+        if(req.body.imgurl) model.imgurl = req.body.imgurl
+
         model.article = articles;
 
         news_service.Update(model)
