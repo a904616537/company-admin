@@ -16,7 +16,6 @@ router.route('/login')
             password : req.body.password
         },
         msg = message();
-
         admin_service.login(user, (bo, admin) => {
             if(bo) {
                 msg.msg           = '登录成功！';
