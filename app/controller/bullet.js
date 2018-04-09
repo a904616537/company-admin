@@ -3,13 +3,30 @@
 let express    = require('express'),
 router         = express.Router(),
 bullet_service = require('../services/bullet.service'),
-message        = require('../helpers/message');
+message        = require('../helpers/message'),
+config         = require('../../setting/config'),
+cacheFolder    = config.root + '/public/images/upload/';
 
 router.route('/list')
 .get((req, res) => {
     bullet_service.getBullet(result => {
     	console.log('result', result)
         res.render('bullet', {data : result})
+    })
+})
+
+router.route('/download/:_id')
+.get((req, res) => {
+    const _id = req.params._id;
+    bullet_service.SelectById(_id)
+    .then(result => {
+        let path = result.file.split("/")[5];
+        const filepath = cacheFolder + path;
+        const article = result.article.find(val => val.language == 'zh')
+        res.download(filepath, article.title + '.xlsx');
+    })
+    .catch(err => {
+        res.send('error')
     })
 })
 
