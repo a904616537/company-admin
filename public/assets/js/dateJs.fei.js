@@ -210,33 +210,6 @@ function hidDate(){
 	document.getElementById('dateOuter').style.display = "none";
 }
 
-//控制键盘操作，左右控制月份，空格返回当前日期
-document.onkeydown=function(e){
-	/*
-	 * 浏览器兼容性
-	 * ie的document对象有一个all属性，它的里面存放了页面的所有标签，而其它浏览器是没有的，所以在ie中，事件对象的传播会绑定在全局的windows上，所以ie浏览器肯定是都支持window.event
-	 * firefox只支持事件对象作为参数传入，而这又恰恰是ie6/ie7/ie8所无法实现的，所以可以成功的区分这两类
-	 * ie9/chrome/opera/safari，则两种方式都支持
-	 * var e = event?event||window.event可以保证各浏览器的兼容的
-	 */
-	var thisEvent = e || window.event;  
-	var keyCode = thisEvent.keyCode || thisEvent.which;  
-	//若控件是隐藏状态  
-	if(document.getElementById('dateOuter').style.display == "none"){  
-		return false;  
-	}
-	switch(keyCode){  
-		case 32://空格，返回当前日期
-		getThisDay();break;
-		case 27://Esc，关闭日历插件
-		hiddenCal();break;
-		case 37://left，向左
-		lastMonthClick();break;
-		case 39://right，向右
-		nextMonthClick();break;
-	}
-}
-
 /*模拟windows7日历 鼠标滑轮滚动翻页*/  
 var direct;
 var scrollFunc=function(e){
