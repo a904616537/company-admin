@@ -8,6 +8,39 @@ config      = require('../../setting/config'),
 router      = express.Router(),
 cacheFolder = config.root + '/public/images/upload/';
 
+router.route('/upload/excel')
+.post((req,res) => {
+    var userDirPath = cacheFolder;
+    if (!fs.existsSync(userDirPath)) {
+        fs.mkdirSync(userDirPath);
+    }
+    var form            = new formidable.IncomingForm(); //创建上传表单
+    form.encoding       = 'utf-8';          //设置编辑
+    form.uploadDir      = userDirPath;      //设置上传目录
+    form.keepExtensions = true;             //保留后缀
+    form.maxFieldsSize  = 2 * 1024 * 1024;  //文件大小
+    form.type           = true;
+
+    var displayUrl;
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            res.send(err);
+            return;
+        }
+        var extName = 'xlsx'; //后缀名
+        var avatarName = Date.now() + '.' + extName;
+        var newPath    = form.uploadDir + avatarName;
+        displayUrl     = config.app.host + avatarName;
+        
+        fs.renameSync(files.file.path, newPath); //重命名
+        res.send({
+            code : 200,
+            msg  : displayUrl
+        });
+    })
+});  
+
+
 
 router.route('/upload')
 .get((req, res, next) => {
@@ -32,6 +65,7 @@ router.route('/upload')
             return;
         }
         var extName = ''; //后缀名
+        console.log('file.type', files.file.type)
         switch (files.file.type) {
             case 'image/pjpeg':
                 extName = 'jpg';

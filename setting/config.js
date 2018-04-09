@@ -13,7 +13,7 @@ const config = {
 		maxOrderTime : 1080,
 		app          : {
 			name : 'company',
-			host : 'http://admin.skyfortune.sh.cn/images/upload/'
+			host : 'http://localhost:9011/images/upload/'
 		},
 		mongo : 'mongodb://127.0.0.1/company',
 		main  : {
