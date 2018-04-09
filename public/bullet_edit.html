@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>特价编辑 - 后台</title>			
+		
+
+		<!-- Favicon and touch icons -->
+		<link rel="shortcut icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+
+	    <!-- Css files -->
+	    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">		
+		<link href="/assets/css/jquery.mmenu.css" rel="stylesheet">		
+		<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+		<link href="/assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+		<link href="/assets/plugins/chosen/css/chosen.css" rel="stylesheet">
+		<link href="/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet">
+	    <link href="/assets/css/style.min.css" rel="stylesheet">
+		<link href="/assets/css/add-ons.min.css" rel="stylesheet">		
+		<style>
+			.everyWeekDay .weekday,.everyDay .days {/*解决span不支持width属性*/display: -moz-inline-box;display: inline-block;margin: 5px 0 0 20px;text-align: center;width: 20px;border: 1px solid #F7F7F7;cursor: pointer;}		
+			.marginTop{margin-top: 5px;}
+			.selectStyle{padding-left: 10px;border: none;border-radius: 3px;outline: none;appearance: none;-moz-appearance: none;-webkit-appearance: none;margin: 0 10px 0 10px;width: 60px;border-color: #0FB9EF;color: #0FB9EF;}       
+		</style>
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+</head>
+
+<body>
+	
+	<div class="container-fluid content">
+	
+		<div class="row">
+			<%- include menu.html %>
+			
+		<!-- start: Content -->
+		<div class="main ">
+		
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa-indent"></i>特价编辑</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="/">Home</a></li>
+						<li><i class="fa fa-list-alt"></i><a href="/bullet/list">特价</a></li>
+						<li><i class="fa fa-indent"></i>特价编辑</li>				
+					</ol>
+				</div>
+			</div>
+			
+			<div class="row hideInIE8">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2><i class="fa fa-indent red"></i><strong>设置</strong></h2>
+						</div>
+						<div class="panel-body">
+							<div class="form-horizontal">
+								  
+								  <div class="form-group">
+									<div class="controls">
+										
+										<div class="col-md-1 col-sm-2 col-xs-3">
+
+											<label class="control-label">置顶</label>
+											<label class="switch switch-primary">
+										      <input type="checkbox" id="top" class="switch-input" <%=data.top?"checked":""%>>
+										      <span class="switch-label" data-on="是" data-off="否"></span>
+										      <span class="switch-handle"></span>
+										    </label>
+										</div>
+
+										<div class="col-md-1 col-sm-2 col-xs-3">
+											<label class="control-label">过期时间</label>
+											<input type="text" id="txt_calendar" value="<%=data.endTime%>" style="background-color: #cfcfcf;border: none;border-radius: 5px;padding-left: 10px;outline:none;" readonly="readonly" onfocus="showDate()"/>
+											<script src="/assets/js/dateJs.fei.js"></script>
+										</div>
+									</div>
+
+								  </div>
+							</div>
+						</div>
+					</div>
+				</div><!--/col-->
+
+			</div><!--/row-->
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2><i class="fa fa-plus-square-o red"></i><strong>文件</strong></h2>
+							<div class="panel-actions">
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label class="control-label">上传文件，文件类型必须为 excel 格式</label>
+								<div class="controls">
+										<form action="/upload/excel" id="imgurl" class="dropzone">
+											<div class="fallback">
+												<input name="upload" type="file" multiple="" />
+											</div>
+										</form>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div><!--/col-->
+			</div>
+			
+			<div class="row">
+
+				<%
+            		var zh_news={};
+            		if(data.article) {
+            			zh_news = data.article.find(article => article.language == "zh");
+            		}
+            	%>
+
+			    <div class="col-md-6">
+			        <div class="panel panel-default">
+			            <div class="panel-heading">
+			                <h2><i class="fa fa-indent red"></i><strong>中文版本</strong></h2>
+			            </div>
+						<div class="panel-body">
+				                
+				                <div class="form-group">
+				                    <label class="col-md-3 control-label" for="text-input">标题</label>
+				                    <div class="col-md-9">
+				                    	
+				                        <input type="text" id="zh_title" name="text-input" class="form-control" placeholder="标题" value="<%=zh_news.title%>">
+				                        <span class="help-block">标题尽量不要多于20字</span>
+				                    </div>
+				                </div>
+								<br>
+						</div>
+						<div class="panel-footer">
+		                    <button type="button" id="submit" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i>提交</button>
+		                </div>	
+			        </div>	
+			    </div>
+
+
+					<%
+                		var en_news = {};
+                		if(data.article) {
+                			en_news = data.article.find(article => article.language == "en");
+                		}
+                	%>
+			     <div class="col-md-6">
+			        <div class="panel panel-default">
+			            <div class="panel-heading">
+			                <h2><i class="fa fa-indent red"></i><strong>英文版本</strong></h2>
+			            </div>
+						<div class="panel-body">
+				                
+				                <div class="form-group">
+				                    <label class="col-md-3 control-label" for="text-input">标题</label>
+				                    <div class="col-md-9">
+				                        <input type="text" id="en_title" name="text-input" class="form-control" placeholder="标题" value="<%=en_news.title%>">
+				                        <span class="help-block">文章标题</span>
+				                    </div>
+				                </div>
+								<br>
+						</div>
+			        </div>	
+			    </div>
+
+				
+			</div><!--/.row-->
+			
+			
+			
+				
+    
+		</div>
+		<!-- end: Content -->
+		
+	</div><!--/container-->
+		
+	<%- include modal.html %>
+	
+	<div class="clearfix"></div>
+	
+		
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="/assets/js/jquery-2.1.1.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="/assets/js/jquery-1.11.1.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='/assets/js/jquery-2.1.1.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='/assets/js/jquery-1.11.1.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="/assets/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>	
+	
+	
+	<!-- page scripts -->
+	<script src="/assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="/assets/plugins/chosen/js/chosen.jquery.min.js"></script>
+	<script src="/assets/plugins/autosize/jquery.autosize.min.js"></script>
+	<script src="/assets/plugins/placeholder/jquery.placeholder.min.js"></script>
+	<script src="/assets/plugins/maskedinput/jquery.maskedinput.min.js"></script>
+	<script src="/assets/plugins/dropzone/js/dropzone.min.js"></script>
+	<script src="/assets/plugins/moment/moment.min.js"></script>
+
+	<!-- theme scripts -->
+	<script src="/assets/js/SmoothScroll.js"></script>
+	<script src="/assets/js/jquery.mmenu.min.js"></script>
+
+	<script>
+		var imgurl;
+		$("#imgurl.dropzone").dropzone({
+			success: function(status, data) {
+			    imgurl = data.msg;
+			    console.log('data', data)
+			}
+		});
+		function submit(){
+			var msg      = $("#modal_msg");
+			var top      = $("#top").is(':checked');
+			var zh_title = $("#zh_title").val();
+			var en_title = $("#en_title").val();
+			var endTime  = $("#txt_calendar").val();
+
+			var model = {
+				"file"     : imgurl,
+				"top"      : top,
+				"zh_title" : zh_title,
+				"en_title" : en_title,
+				"endTime"  : endTime
+			};
+			console.log(model)
+			var type = 'post';
+			<%if(data._id) {%>
+				type = 'put'
+				model._id = '<%=data._id%>';
+			<%}%>
+			console.log('type', type)
+			$.ajax({
+				url    : '/bullet',
+				type   : type,
+				data   : model,
+				success: function(restult, status) {
+					if(status == 'success') {
+						if(restult.status == 1) {
+							msg.text(restult.msg);
+						} else {
+							msg.text(restult.msg);
+						}
+					} else {
+						msg.text('请求失败');
+					}
+				},
+				error: function(restult, err){
+					msg.text('请求出错');
+					console.log(restult);
+				}
+			});
+		}
+
+		$(function(){
+			$("#submit").click(submit);
+		});
+	</script>
+
+	<!-- end: JavaScript-->
+	
+</body>
+</html>
