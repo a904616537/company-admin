@@ -46,7 +46,8 @@ module.exports = (app, config) => {
     app.use((req, res, next) => {
         var url = req.originalUrl;
         console.log('拦截器！', url)
-        if (url != "/login" && url != "/404" && url != "/error" && url != "/register" && !req.session.admin)
+        const v = url.indexOf('bullet');
+        if (v < 1 && url != "/login" && url != "/404" && url != "/error" && url != "/register" && !req.session.admin)
             return res.redirect('/login')
         next();
     })
