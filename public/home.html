@@ -95,7 +95,11 @@
 			var slogan_en = setting.find(n=>n.key == 'slogan' && n.lang == 'en')
 			var phone_en = setting.find(n=>n.key == 'phone' && n.lang == 'en')
 			var email_en = setting.find(n=>n.key == 'email' && n.lang == 'en')
-			var address_en = setting.find(n=>n.key == 'address' && n.lang == 'en')%>
+			var address_en = setting.find(n=>n.key == 'address' && n.lang == 'en')
+			var adver_zh = setting.find(n=>n.key == 'adver' && n.lang == 'zh')
+			var adver_en = setting.find(n=>n.key == 'adver' && n.lang == 'en')
+			var adver_desc_zh = setting.find(n=>n.key == 'adver_desc' && n.lang == 'zh')
+			var adver_desc_en = setting.find(n=>n.key == 'adver_desc' && n.lang == 'en')%>
 
 			<div class="row profile">
 				<div class="col-md-4" id="col">
@@ -182,6 +186,14 @@
                                     <label class="control-label">公司地址</label>
                                     <input type="text" key="address" lang="zh" value="<%=address_zh?address_zh.value: ''%>" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label">浮动广告标题</label>
+                                    <input type="text" key="adver" lang="zh" value="<%=adver_zh?adver_zh.value: ''%>" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">浮动广告内容</label>
+                                    <textarea id="adver_desc_zh" key="adver_desc" name="adver_desc_zh" lang="zh" rows="3" class="form-control"><%=adver_desc_zh?adver_desc_zh.value: ''%></textarea>
+                                </div>
                                         
                             </form>
                         </div>
@@ -219,6 +231,14 @@
                                 <div class="form-group">
                                     <label class="control-label">公司地址</label>
                                     <input type="text" key="address" lang="en" value="<%=address_en?address_en.value: ''%>" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">浮动广告标题</label>
+                                    <input type="text" key="adver" lang="en" value="<%=adver_en?adver_en.value: ''%>" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">浮动广告内容</label>
+                                    <textarea id="adver_desc_en" key="adver_desc" name="adver_desc_en" lang="en" rows="3" class="form-control"><%=adver_desc_en?adver_desc_en.value: ''%></textarea>
                                 </div>
                                         
                             </form>
@@ -281,7 +301,7 @@
 		<script language="javascript" type="text/javascript" src="assets/plugins/excanvas/excanvas.min.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
-		$('input').change(function() {
+		var fun = function() {
 			var key   = $(this).attr('key');
 			var lang  = $(this).attr('lang');
 			var value = $(this).val();
@@ -294,7 +314,10 @@
                     $('#col').html(data);
                 }
             });
-		})
+		};
+		$('input').change(fun)
+		$('textarea').change(fun)
+
 	</script>
 	
 	<!-- end: JavaScript-->

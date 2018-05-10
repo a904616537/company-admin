@@ -265,6 +265,8 @@
 
 		$("#imgurl.dropzone").dropzone({
 			success: function(status, data) {
+				console.log('status', status)
+				console.log('data',data)
 			    imgurl.push(data.msg);
 			}
 		});
