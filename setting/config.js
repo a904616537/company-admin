@@ -15,7 +15,7 @@ const config = {
 			name : 'company',
 			host : 'http://localhost:9011/images/upload/'
 		},
-		mongo : 'mongodb://127.0.0.1/company',
+		mongo : 'mongodb://kain:000000@127.0.0.1/company',
 		main  : {
 			languagePath : rootPath + '/language/'
 		},
@@ -33,7 +33,7 @@ const config = {
 			name : 'company',
 			host : 'http://admin.skyfortune.sh.cn/images/upload/'
 		},
-		mongo : 'mongodb://127.0.0.1/company',
+		mongo : 'mongodb://kain:000000@127.0.0.1/company',
 		main  : {
 			languagePath : rootPath + '/language/'
 		},
