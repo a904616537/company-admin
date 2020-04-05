@@ -16,6 +16,10 @@ module.exports = {
 	},
 	Insert(news) {
 		return new Promise((resolve, reject) => {
+			news.article = news.article.map(v => {
+				v.context = v.context.replace('../', "admin.skyfortune.sh.cn/");
+				return v;
+			})
 			news_mongo.create(news, (err, doc) => {
 				if(err) return reject(err);
 				resolve(doc);
