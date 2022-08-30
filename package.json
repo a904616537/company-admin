@@ -21,7 +21,7 @@
     "glob": "^7.1.1",
     "method-override": "^2.3.7",
     "moment": "^2.17.1",
-    "moment-timezone": "^0.5.11",
+    "moment-timezone": "^0.5.35",
     "mongoose": "^4.7.7",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",
